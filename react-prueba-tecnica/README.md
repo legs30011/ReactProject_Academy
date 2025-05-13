@@ -1,11 +1,12 @@
 #Prueba Tecnica para Juniors y Trainees de React en Live Coding
 *APIs
 
--Facts Random: http://carfact.ninja/fact 
--Imagen Random : http://cataas.com/cat/says/hello 
+-Facts Random: http://catfact.ninja/fact 
+-Imagen Random : `http://cataas.com/cat/says/${}?size=50&color=red&json=true`
 
-Recupera un hecho alateorio de gatos y muestra una imagen de un 
-gato con la primera palabra hecho
+--- Recupera un hecho alateorio de gatos de la primera API
+--- Recupera la primera palabra del hecho
+--- Muestra una imagen de un gato con la primera.
 
 
 ######################
@@ -25,7 +26,7 @@ npm install @vitejs/plugin-react -E
 
 instalar 2 dependencias:
 #npm install react react-dom -E
-
+fv
 paso3:
 TIENES que crear la configuracion de vite.config 
 en la raiz del proyecto
@@ -48,3 +49,5 @@ vas despues a tu .json aumentas:
 "eslintConfig" :{
     "extends": "./node_modules/standar/eslintrc.json"
 }
+
+//mdn para buscar info en la hora de buscar
