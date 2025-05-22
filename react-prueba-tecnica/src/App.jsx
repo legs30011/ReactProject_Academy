@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './style.css';
 
 const CAT_ENDPOINT_FACT = 'https://catfact.ninja/fact';
-
+ 
 export function App() {
     const [fact, setFact] = useState();
     const [image, setImage] = useState();
