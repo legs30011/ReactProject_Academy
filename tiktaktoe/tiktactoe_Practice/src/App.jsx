@@ -7,9 +7,15 @@ import { turnos} from './constantes.js'
 import { checkWinner,checkEndGame} from './logic/board.js'
 
 function App() {
-  const [board, setBoard] = useState(
-    Array(9).fill(null)
-  );
+  //localStorage para guardar el tablero y el turno
+  // importante no poner fuera para que no se renderize en 
+  // cada render de la app y se  vuelve lento
+  const [board, setBoard] = useState( () => {
+    const boardFromStorage = window.localStorage.getItem('board');
+    if (boardFromStorage) return JSON.parse(boardFromStorage);
+    return Array(9).fill(null)
+  })
+
   const [turno, setTurno] = useState(turnos.x);
   // null significa que no hay ganador, false significa empate
   const [winner, setWinner] = useState(null);
