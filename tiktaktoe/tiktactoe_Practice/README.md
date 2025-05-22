@@ -27,6 +27,7 @@
 ### Rendering Lists
 * Uses `map()` on arrays to render lists.
 * Each item must have a unique `key` prop for React's efficiency.
+* Keys cannot be a number !!!
 
 ### Events
 * React uses a consistent synthetic event system.
@@ -37,3 +38,6 @@
 * `localStorage` persistently stores data in the browser.
 * Use `localStorage.setItem('key', 'value')` to save and `localStorage.getItem('key')` to read.
 * Useful for preferences, tokens, etc.
+
+
+### Preguntas que tengo:

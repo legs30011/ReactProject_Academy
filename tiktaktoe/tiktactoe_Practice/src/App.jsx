@@ -24,6 +24,9 @@ function App() {
       setBoard(Array(9).fill(null));
       setTurno(turnos.x);
       setWinner(null); // Reiniciamos el ganador a null
+      // Limpiamos el almacenamiento local 
+      window.localStorage.removeItem('board');
+      window.localStorage.removeItem('turn');
   }
   const updateBoard = (index) => {
     // No actualizamos esta posición si ya tiene algo o si ya hay un ganador
@@ -37,6 +40,10 @@ function App() {
     // Cambiar el turno
     const newTurn = turno === turnos.x ? turnos.o : turnos.x;
     setTurno(newTurn);
+
+    //guardar aqui partida sino si pongo en el local storage no se actualiza
+    window.localStorage.setItem('board', JSON.stringify(newBoard));
+    window.localStorage.setItem('turn', newTurn);
     // Revisar si hay ganador
     const newWinner = checkWinner(newBoard);
     if (newWinner) {
