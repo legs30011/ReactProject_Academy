@@ -7,17 +7,17 @@ interface UserCardProps {
 }
 
 const UserCard: React.FC<UserCardProps> = ({ name, age, onClick }) => {
-  const handleClick = () => {
-    onClick();
-    alert(`Hello, ${name}!`);
-  };
+const handleClick = () => {
+onClick();
+alert(`Hello, ${name}!`);
+};
 
-  return (
-    <div style={{ border: '1px solid black', padding: '10px', margin: '10px', cursor: 'pointer' }} onClick={handleClick}>
-      <h3>{name}</h3>
-      <p>Age: {age}</p>
-    </div>
-  );
+return (
+<div style={{ border: '1px solid black', padding: '10px', margin: '10px', cursor: 'pointer' }} onClick={handleClick}>
+    <h3>{name}</h3>
+    <p>Age: {age}</p>
+</div>
+);
 };
 
 export default UserCard;

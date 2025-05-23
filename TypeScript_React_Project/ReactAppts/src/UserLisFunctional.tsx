@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 interface User {
   id: number;
@@ -7,43 +7,31 @@ interface User {
   email: string;
 }
 
-const UserListFunctional: React.FC = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/users');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data: User[] = await response.json();
-        setUsers(data);
-        setLoading(false);
-      } catch (e: any) {
-        setError(e.message);
-        setLoading(false);
-      }
-    };
-
-    fetchUsers();
-  }, []); // Empty dependency array means this effect runs once after the initial render
-
-  if (loading) {
-    return <div>Loading users...</div>;
+const fetchUsersCached = React.cache(async (): Promise<User[]> => {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/users');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error: any) {
+    console.error("Error fetching users:", error);
+    throw error; // Re-throw the error so Suspense knows the Promise failed
   }
+});
 
-  if (error) {
-    return <div>Error loading users: {error}</div>;
-  }
+// no se que pero esto soluciono xd
+const usersPromise = fetchUsersCached();
+
+const UserListWithUse: React.FC = () => {
+  console.log("UserListWithUse rendered");
+  const users = React.use(usersPromise);
 
   return (
     <div>
-      <h2>User List</h2>
+      <h2>User List (using use Function)</h2>
       <ul>
-        {users.map(user => (
+        {users.map((user) => (
           <li key={user.id}>
             {user.name} ({user.username}) - {user.email}
           </li>
@@ -53,4 +41,5 @@ const UserListFunctional: React.FC = () => {
   );
 };
 
-export default UserListFunctional;
+export default UserListWithUse;
+
