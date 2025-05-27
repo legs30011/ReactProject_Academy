@@ -33,13 +33,15 @@ npx eslint --init
     * When you want to leverage the browser's built-in form handling for certain inputs (like file uploads).
     * Potentially slightly less re-renders for very large and complex forms where intermediate state updates might be performance-intensive (though this is often less of a concern with modern React).
 **Summary:**
+
+
 Choose **controlled components** when you need fine-grained control over the input's value and want to react to every change. Choose **uncontrolled components** for simpler scenarios where you only need the final value, or when integrating with systems that handle form state differently. Controlled components are generally preferred in most React applications for their predictability and easier implementation of complex logic.
 
 **Props**
- First i define an interface UserCardProps to strongly type the props the component expects (name, age, and onClick).
-  The UserCard functional component destructures these props.
-  The name and age are displayed.
-  When the div is clicked, the handleClick function is called, which in turn calls the onClick prop function and displays an alert.
+First i define an interface UserCardProps to strongly type the props the component expects (name, age, and onClick).
+The UserCard functional component destructures these props.
+The name and age are displayed.
+When the div is clicked, the handleClick function is called, which in turn calls the onClick prop function and displays an alert.
 
 **UserListFunctional**
 I useState to manage the users array, the loading state, and any potential error.
@@ -91,6 +93,6 @@ Resuelta (Fulfilled): Una vez que la Promesa se resuelve, React.use() devuelve e
 Rechazada (Rejected): Si la Promesa falla, React.use() lanza el error. Este error debería ser capturado por un límite de error (error boundary).
 En esencia, React.use() te permite leer el resultado de una Promesa directamente en tu componente funcional, haciendo que la lógica de carga y manejo de errores sea más declarativa y esté más integrada con el sistema de concurrencia de React.
 
-Con Contexto: También puedes usar React.use(MiContexto) para leer el valor de un Contexto, de forma similar a useContext(MiContexto).
+Con Contexto: Podia usar React.use(MiContexto) para leer el valor de un Contexto, de forma similar a useContext(MiContexto).
 
-En nuestro caso, usamos React.use() para leer el resultado de la Promesa que devuelve la petición a la API. La clave para solucionar el problema de las múltiples peticiones fue asegurarnos de que siempre le estábamos pasando la misma instancia de la Promesa a React.use() en cada render del componente.
+En este caso usamos React.use() para leer el resultado de la Promesa que devuelve la petición a la API. La clave para solucionar el problema de las múltiples peticiones fue asegurarnos de que siempre le estábamos pasando la misma instancia de la Promesa a React.use() en cada render del componente.
