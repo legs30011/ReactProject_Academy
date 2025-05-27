@@ -1,4 +1,3 @@
-// src/data/books.ts
 import { Book } from '../types/Book';
 
 const books: Book[] = [

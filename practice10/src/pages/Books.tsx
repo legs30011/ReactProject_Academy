@@ -1,4 +1,3 @@
-// src/pages/Books.tsx
 import React from 'react';
 import { Link } from 'react-router-dom'; 
 import books from '../data/book'; 
