@@ -14,33 +14,49 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+## Implementación de Formulario Multi-Paso
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Este formulario guía al usuario a través de cuatro pasos distintos, recopilando información personal, de dirección y preferencias antes de la revisión final y el envío.
 
-### `npm run build`
+### Pasos del Formulario:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1.  **Información Personal** (`src/components/Step1PersonalInfo.tsx`):
+    * Campos: Nombre (texto, obligatorio), Edad (número, mínimo 14, obligatorio), Email (email válido, obligatorio).
+    * **Implementación:** Se utilizan los métodos `register` de `react-hook-form` para registrar los inputs y se muestran los errores de validación (`errors`).
+    * **Validación:** Definida en `src/validation/schemas.ts` dentro de `step1Schema` usando Yup.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2.  **Dirección** (`src/components/Step2Address.tsx`):
+    * Campos: País (texto, obligatorio), Ciudad (texto, obligatorio), Código Postal (texto, formato válido, obligatorio).
+    * **Implementación:** Similar al Paso 1, se registran los inputs y se muestran los errores.
+    * **Validación:** Definida en `src/validation/schemas.ts` dentro de `step2Schema` con Yup.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3.  **Preferencias** (`src/components/Step3Preferences.tsx`):
+    * Campos: Método de Contacto Preferido (radio: Email/Phone/WhatsApp, obligatorio), ¿Suscribirse al Boletín? (checkbox), Categoría Favorita (select: Tecnología/Salud/Arte/Viajes, obligatorio).
+    * **Implementación:** Registro de los diferentes tipos de input (radio, checkbox, select).
+    * **Validación:** Definida en `src/validation/schemas.ts` dentro de `step3Schema` usando Yup.
 
-### `npm run eject`
+4.  **Revisión y Envío** (`src/components/Step4ReviewSubmit.tsx`):
+    * Muestra la información recopilada del estado global del formulario (`formData`) para su revisión.
+    * **Implementación:** Accede a los datos del formulario y los renderiza. El botón "Enviar" activa la función `onSubmit` en el componente principal (`src/components/MultiStepForm.tsx`).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Funcionalidades Clave y Rutas:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* **Navegación entre Pasos:**
+    * Botones "Atrás" y "Siguiente" en `src/components/MultiStepForm.tsx` controlan el estado `currentStep` (usando `useState` en `src/components/MultiStepForm.tsx`).
+    * La función `onNextStep` en `src/components/MultiStepForm.tsx` utiliza `trigger()` de `react-hook-form` para validar el paso actual antes de avanzar.
+    * La función `onBackStep` en `src/components/MultiStepForm.tsx` simplemente decrementa `currentStep`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* **Validación por Paso con Yup:**
+    * Los esquemas de validación para cada paso se definen en `src/validation/schemas.ts` (`step1Schema`, `step2Schema`, `step3Schema`, `step4Schema`).
+    * En `src/components/MultiStepForm.tsx`, el `resolver: yupResolver(schemas[currentStep])` en `useForm` asocia el esquema correcto al paso actual.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* **Persistencia con `localStorage`:**
+    * En `src/components/MultiStepForm.tsx`, un `useEffect` escucha los cambios en los valores del formulario (`watch` de `react-hook-form`) y los guarda en `localStorage` con la clave `'multiStepFormData'`.
+    * Al inicializar `formData` (usando la inicialización perezosa de `useState`), se intenta leer los datos de `localStorage`.
 
-## Learn More
+* **Componente Principal del Formulario** (`src/components/MultiStepForm.tsx`):
+    * Utiliza `FormProvider` para proveer los métodos de `useForm` a los componentes de los pasos.
+    * Mantiene el estado global del formulario (`formData` con `useState`).
+    * Renderiza el componente del paso actual dinámicamente basado en `currentStep`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+En resumen, el flujo se maneja principalmente en `src/components/MultiStepForm.tsx`, orquestando la navegación, la validación (definida en `src/validation/schemas.ts`), la persistencia y la renderización de los componentes de cada paso (ubicados en la carpeta `src/components`).
