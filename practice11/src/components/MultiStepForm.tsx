@@ -48,8 +48,8 @@ const MultiStepForm: React.FC = () => {
     handleSubmit,
     formState: { errors, isValid },
     trigger, // Para forzar la validación
-    watch, // Para observar cambios en el formulario
-    reset, // Para resetear el formulario
+    watch, 
+    reset, 
   } = methods;
 
   // Efecto para guardar los datos del formulario en localStorage cada vez que cambian.
@@ -57,7 +57,7 @@ const MultiStepForm: React.FC = () => {
     const subscription = watch((value) => {
       setFormData((prev) => {
         const updated = { ...prev, ...value };
-        localStorage.setItem(localStorageKey, JSON.stringify(updated));
+        localStorage.setItem(localStorageKey, JSON.stringify(updated));// Actualiza los datos en localStorage
         return updated;
       });
     });
@@ -66,13 +66,11 @@ const MultiStepForm: React.FC = () => {
   }, []);
 
   // Efecto para resetear el formulario cada vez que cambia el paso o los datos del formulario.
-  // Esto es crucial para aplicar los nuevos valores por defecto del esquema del paso actual.
   useEffect(() => {
     reset(formData);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStep, reset]);
 
-  // Manejador para avanzar al siguiente paso.
   const onNextStep = async () => {
     // Dispara la validación de los campos del paso actual.
     const valid = await trigger();
@@ -81,7 +79,7 @@ const MultiStepForm: React.FC = () => {
       return;
     }
     // Si la validación es exitosa y no es el último paso, avanza.
-    if (currentStep < 3) { // El último paso es el índice 3 (revisar/enviar)
+    if (currentStep < 3) { // 3 por que es el ultimo paso
       setStep((s) => s + 1);
     }
   };
@@ -94,11 +92,10 @@ const MultiStepForm: React.FC = () => {
   // Manejador para enviar el formulario.
   // Se tipifica explícitamente como SubmitHandler<FormData>.
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    // En una aplicación real, aquí enviarías los datos a un servidor.
-    alert('¡Formulario enviado! Revisa la consola para ver los datos.'); // Considera reemplazar alert con un modal personalizado
+    alert('¡Formulario enviado! Revisa la consola para ver los datos.'); 
     console.log('Datos enviados:', data);
     localStorage.removeItem(localStorageKey); // Limpia los datos guardados
-    setStep(0); // Reinicia al primer paso
+    setStep(0); // Reinicio de 0 
     setFormData(initialValues); // Reinicia el estado de los datos del formulario
     reset(initialValues); // Reinicia el estado de react-hook-form
   };

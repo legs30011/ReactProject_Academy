@@ -5,7 +5,7 @@ import { FormData } from '../types/formData';
 interface Props {
   register: UseFormRegister<FormData>;
   errors: FieldErrors<FormData>;
-  formData: FormData; // Se usa para establecer los valores por defecto de los radios/checkboxes
+  formData: FormData; 
 }
 
 const Step3Preferences: React.FC<Props> = ({ register, errors, formData }) => {

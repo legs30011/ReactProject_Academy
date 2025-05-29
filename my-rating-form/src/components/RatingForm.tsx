@@ -1,6 +1,6 @@
 // src/components/RatingForm.tsx
 import React, { useState } from 'react';
-import { Formik, Field, Form, ErrorMessage, type FormikProps, type FormikHelpers } from 'formik'; // <-- Añadido 'type FormikHelpers'
+import { Formik, Field, Form, ErrorMessage, type FormikProps, type FormikHelpers } from 'formik'; 
 import { ratingFormSchema } from '../validation/ratingSchemas';
 import type { RatingFormData, SubmittedRatingData } from '../types/ratingForm';
 
@@ -11,7 +11,7 @@ const RatingForm: React.FC = () => {
   // Valores iniciales del formulario
   const initialValues: RatingFormData = {
     name: '',
-    rating: 0, // 0 para que no haya estrella seleccionada al inicio
+    rating: 0, 
     feedback: '',
   };
 

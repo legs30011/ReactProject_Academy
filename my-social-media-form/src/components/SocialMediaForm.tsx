@@ -1,4 +1,3 @@
-// src/components/SocialMediaForm.tsx
 import React from 'react';
 import { useForm, useFieldArray, type SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,7 +5,6 @@ import type { SocialMediaFormData } from '../types/socialMediaForm';
 import { socialMediaFormSchema } from '../validation/socialMediaSchemas';
 
 const SocialMediaForm: React.FC = () => {
-  // Configuración de react-hook-form
   const {
     control, // Necesario para useFieldArray
     register, // Para registrar inputs
@@ -31,10 +29,8 @@ const SocialMediaForm: React.FC = () => {
   const onSubmit: SubmitHandler<SocialMediaFormData> = (data) => {
     console.log('Datos del formulario enviados:', data);
     alert('Formulario enviado! Revisa la consola para ver los datos.');
-    // Aquí podrías enviar los datos a una API, etc.
   };
 
-  // Observa los valores del formulario para depuración (opcional)
   // const formValues = watch();
   // useEffect(() => {
   //   console.log('Valores del formulario:', formValues);

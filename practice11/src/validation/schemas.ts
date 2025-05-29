@@ -69,8 +69,8 @@ export const step3Schema: yup.ObjectSchema<FormData> = yup.object({
     .required('La categoría favorita es obligatoria'),
 });
 
-// Esquema para el paso 4 (ReviewSubmit). Incluso si no hay validaciones,
-// react-hook-form espera un esquema válido. Un esquema de objeto vacío funciona.
+// Esquema para el paso 4 (ReviewSubmit). 
+// react-hook-form espera un esquema válido. Un esquema de objeto vacío funciona xd 
 export const step4Schema: yup.ObjectSchema<FormData> = yup.object({
   name: yup.string().optional().default(''), // Añadir .default('') para que el tipo sea solo string
   age: yup.mixed<number | ''>().optional().default(''),
@@ -82,5 +82,5 @@ export const step4Schema: yup.ObjectSchema<FormData> = yup.object({
   subscribeNewsletter: yup.boolean().optional().default(false),
   favoriteCategory: yup.mixed<'Technology' | 'Health' | 'Art' | 'Travel' | ''>().optional().default(''),
 });
-// El array de esquemas, ahora con el esquema para el paso 4.
+// El array de esquemas, ahora con el esquemapara este ultiumo paso
 export const schemas: yup.ObjectSchema<FormData>[] = [step1Schema, step2Schema, step3Schema, step4Schema];

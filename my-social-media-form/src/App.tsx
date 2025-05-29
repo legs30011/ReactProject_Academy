@@ -1,4 +1,4 @@
-import SocialMediaForm from './components/SocialMediaForm'; // Importa el nuevo componente
+import SocialMediaForm from './components/SocialMediaForm';
 
 function App() {
   return (

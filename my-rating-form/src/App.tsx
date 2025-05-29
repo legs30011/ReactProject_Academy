@@ -1,6 +1,4 @@
-// src/App.tsx
-import React from 'react';
-import RatingForm from './components/RatingForm'; // Importa el nuevo componente
+import RatingForm from './components/RatingForm'; 
 
 function App() {
   return (
