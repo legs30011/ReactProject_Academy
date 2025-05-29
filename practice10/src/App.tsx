@@ -11,7 +11,6 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-        
           <Route index element={<Home />} />  
           <Route path="books" element={<BooksPage />} />
           <Route path="books/:id" element={<BookDetail />} />

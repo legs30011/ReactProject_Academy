@@ -6,19 +6,13 @@ import { Book } from '../types/Book';
 const BookDetail: React.FC = () => {
   // useParams hook: el id le hago extraer
   const { id } = useParams<{ id: string }>();
-  // useNavigate hook: me permite la navegación programática dentro de la aplicación
   const navigate = useNavigate();
-  const book = books.find((b: Book) => b.id === id); // Se especifica el tipo Book para mayor claridad
-
-  // useEffect hook: Se ejecuta después de cada renderizado para manejar efectos secundarios
+  const book = books.find((b: Book) => b.id === id);
   useEffect(() => {
     if (!book) {
-      // Redirige al usuario a la página 404.
-      // 'replace: true' asegura que la entrada actual en el historial del navegador sea reemplazada,
-      // evitando que el usuario pueda volver a la URL inválida con el botón de "atrás".
       navigate('/404', { replace: true });
     }
-  }, [book, navigate]); // Dependencias del efecto: el efecto se re-ejecuta si 'book' o 'navigate' cambian
+  }, [book, navigate]); 
 
   // Si el libro no se ha encontrado (y antes de la redirección), muestra un mensaje de carga
   if (!book) {
@@ -29,8 +23,6 @@ const BookDetail: React.FC = () => {
       </div>
     );
   }
-
-  // Si el libro se encuentra, renderiza sus detalles
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg">
       <h1 className="text-4xl font-bold text-blue-700 mb-4">{book.title}</h1>

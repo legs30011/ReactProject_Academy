@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
 const NotFound: React.FC = () => {
-  const navigate = useNavigate(); // Hook para navegar programáticamente
+  const navigate = useNavigate(); // Hook 
 
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg text-center">

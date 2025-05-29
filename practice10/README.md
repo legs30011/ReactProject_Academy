@@ -78,3 +78,13 @@ También se usa en BookDetail.tsx para el botón "Volver a Libros" y en src/page
 
 8. Páginas 404 (Catch all Pages)
 Aplicación: En src/App.tsx, se define una ruta comodín <Route path="*" element={<NotFound />} />. Esta ruta es la última en ser evaluada por Routes. Si ninguna de las rutas definidas anteriormente coincide con la URL actual, esta ruta comodín se activa y renderiza el componente src/pages/NotFound.tsx, mostrando un mensaje de "Página No Encontrada".
+
+## REACT ROUTER V7
+In two dif modes: 1mode is library  y framework 
+el framework es como la alter de next js(fullstack)
+
+library: react router en ves de useeffect for data fetching, 
+define routes cambio sin help de components sino java objects,
+
+Remix alternative .
+
