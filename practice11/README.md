@@ -60,3 +60,15 @@ Este formulario guía al usuario a través de cuatro pasos distintos, recopiland
     * Renderiza el componente del paso actual dinámicamente basado en `currentStep`.
 
 En resumen, el flujo se maneja principalmente en `src/components/MultiStepForm.tsx`, orquestando la navegación, la validación (definida en `src/validation/schemas.ts`), la persistencia y la renderización de los componentes de cada paso (ubicados en la carpeta `src/components`).
+
+## FormProvider es un componente de React Hook Form que facilita la gestión de formularios complejos al proporcionar un contexto que permite a los componentes secundarios acceder a los métodos y propiedades de la instancia del formulario sin necesidad de "perforar" propiedades a través de múltiples niveles. Sirve para centralizar el estado y la lógica de un formulario, haciendo que los componentes hijos accedan a ella sin tener que pasar los datos directamente, lo que simplifica la estructura y mejora la escalabilidad. 
+##
+¿Cómo funciona?
+1. Centralización del estado:
+FormProvider crea un contexto que encapsula la lógica del formulario (como la gestión de campos, validación y envío).
+2. Acceso a la lógica:
+Los componentes hijos pueden usar el hook useFormContext para acceder a los métodos y propiedades del contexto del formulario, como register, handleSubmit, getValues, etc. 
+3. Evitar "perforación":
+Al utilizar FormProvider y useFormContext, se evita tener que pasar propiedades del formulario a través de muchos niveles del árbol de componentes, lo que simplifica el código y reduce la posibilidad de errores
+
+Básicamente, FormProvider toma el objeto que te devuelve el hook useForm (que contiene métodos como register, handleSubmit, formState, control, etc.) y lo hace accesible a todos los componentes hijos que estén dentro de su árbol a través del context de React.
