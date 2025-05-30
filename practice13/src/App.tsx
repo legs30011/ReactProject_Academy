@@ -14,7 +14,6 @@ const App: React.FC = () => {
   return (
     <NotificationProvider>
       <div className="min-h-screen bg-gray-100 font-sans antialiased flex flex-col">
-        {/* Notification component will float at the top, rendered via Portal */}
         <Notification />
 
         {/* Navbar */}
@@ -28,12 +27,7 @@ const App: React.FC = () => {
 
         {/* Main Content */}
         <main className="flex-grow container mx-auto p-6 flex flex-col items-center justify-center space-y-8">
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Demostración del Sistema de Notificaciones</h2>
-          <p className="text-gray-700 text-lg text-center max-w-2xl">
-            Esta demostración muestra un sistema de notificaciones global construido con React Context.
-            Haz clic en los botones de abajo o en la barra de navegación para ver las notificaciones aparecer y desaparecer automáticamente.
-          </p>
-
+          <h2 className="text-3xl font-extrabold text-gray-900 mb-6">PRACTICA13</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center space-y-4">
               <h3 className="text-xl font-semibold text-gray-800">Mensaje de Éxito</h3>
@@ -63,7 +57,7 @@ const App: React.FC = () => {
 
         {/* Footer */}
         <footer className="bg-gray-800 text-white p-4 text-center text-sm rounded-t-lg mt-8">
-          <p>&copy; 2024 Demostración del Sistema de Notificaciones. Todos los derechos reservados.</p>
+          <p>&copy; GAMBOA PRACTICA 13</p>
         </footer>
       </div>
     </NotificationProvider>
