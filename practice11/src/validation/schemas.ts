@@ -14,12 +14,12 @@ const ageSchema = yup.mixed<number | ''>()
     const numValue = Number(value);
     return isNaN(numValue) ? '' : numValue;
   })
-  .test('is-age-valid', 'La edad debe ser un número y al menos 14', function(value) {
+  .test('is-age-valid', 'La edad debe ser un  numero menor a 90 y mayor igual a 14', function(value) {
     if (value === '') {
       return true;
     }
     const numValue = Number(value);
-    return !isNaN(numValue) && numValue >= 14;
+    return !isNaN(numValue) && numValue >= 14 && numValue <= 90;
   })
   .default('');
 

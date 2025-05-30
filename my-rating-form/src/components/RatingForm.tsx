@@ -16,11 +16,11 @@ const RatingForm: React.FC = () => {
   };
 
   // Manejador de envío del formulario
-  const onSubmit = (values: RatingFormData, { setSubmitting, resetForm }: FormikHelpers<RatingFormData>) => { // <-- Tipado corregido aquí
+  const onSubmit = (values: RatingFormData, { setSubmitting, resetForm }: FormikHelpers<RatingFormData>) => { 
     console.log('Formulario enviado:', values);
     setSubmittedData(values); // Guarda los datos para mostrarlos
     setSubmitting(false); // Indica que el envío ha terminado
-    resetForm(); // Opcional: resetea el formulario después del envío
+    resetForm(); 
   };
 
   return (

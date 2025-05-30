@@ -10,12 +10,12 @@ const socialMediaLinkSchema = yup.object({
       'Selecciona una plataforma válida'
     )
     .required('La plataforma es obligatoria')
-    .default(''), // por defecto lo dejo vacio
+    .default(''), 
   url: yup
     .string()
     .url('Ingresa una URL válida (ej. https://assuresoft.com)')
     .required('La URL es obligatoria')
-    .default(''), //  por defecto lo dejo vacio
+    .default(''), 
 });
 
 // Define el esquema principal para el formulario de redes sociales

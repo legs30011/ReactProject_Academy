@@ -5,7 +5,7 @@ import type { RatingFormData } from '../types/ratingForm';
 export const ratingFormSchema: yup.ObjectSchema<RatingFormData> = yup.object({
 name: yup
 .string()
-.trim()
+.trim()// Elimina espacios en blanco al inicio y al final
 .required('El nombre es obligatorio'),
 rating: yup
 .number()
@@ -20,6 +20,6 @@ feedback: yup
 .when('rating', {
     is: (rating: number) => rating < 3,
     then: (schema) => schema.required('El mensaje de feedback es obligatorio para calificaciones menores a 3'),
-    otherwise: (schema) => schema, // <-- No es necesario .optional() ni .default('') aqui yua lo puse arriba 
+    otherwise: (schema) => schema,  
 }),
 });
