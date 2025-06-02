@@ -1,4 +1,3 @@
-
 import Notification from './components/Notification';
 import TriggerButton from './components/TriggerButton';
 import { NotificationProvider, NotificationType } from './context/NotificationContext';
