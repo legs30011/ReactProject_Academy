@@ -1,98 +1,41 @@
 import React from 'react';
-import { createPortal } from 'react-dom';
-import { useNotification, NotificationType, type NotificationState } from '../context/NotificationContext';
-import { motion, AnimatePresence } from 'framer-motion';
-
-interface NotificationItemProps {
-  notification: NotificationState;
-  onDismiss: (id: string) => void;
-}
-
-const NotificationItem: React.FC<NotificationItemProps> = ({ notification, onDismiss }) => {
-  let bgColor = 'bg-blue-500';
-  let textColor = 'text-white';
-  let icon = 'ℹ️';
-
-  switch (notification.type) {
-    case NotificationType.SUCCESS:
-      bgColor = 'bg-green-500';
-      icon = '✅';
-      break;
-    case NotificationType.ERROR:
-      bgColor = 'bg-red-500';
-      icon = '❌';
-      break;
-    case NotificationType.WARNING:
-      bgColor = 'bg-yellow-500';
-      textColor = 'text-gray-900';
-      icon = '⚠️';
-      break;
-    case NotificationType.INFO:
-    default:
-      bgColor = 'bg-blue-500';
-      icon = 'ℹ️';
-      break;
-  }
-
-  const animationPresets = {
-    initial: { opacity: 0, y: -50, scale: 0.8 },
-    animate: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 100, damping: 15 } },
-    exit: { opacity: 0, y: -50, scale: 0.8, transition: { duration: 0.2 } },
-  };
-
-  return (
-    <motion.div
-      key={notification.id}
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 p-4 rounded-lg shadow-lg flex items-center justify-between space-x-4
-                  ${bgColor} ${textColor}`}
-      style={{ minWidth: '250px', maxWidth: '90%' }}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      variants={animationPresets}
-      role="status"
-      aria-live="polite"
-      aria-atomic="true"
-    >
-      <div className="flex items-center space-x-2">
-        <span className="text-xl" aria-hidden="true">{icon}</span>
-        <p className="font-semibold text-sm sm:text-base">{notification.message}</p>
-      </div>
-      <button
-        onClick={() => onDismiss(notification.id)}
-        className="ml-4 p-1 rounded-full hover:bg-white hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors duration-200"
-        aria-label="Dismiss notification"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-          aria-hidden="true"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </motion.div>
-  );
-};
+import { useNotification, NotificationType } from '../context/NotificationContext';
 
 const Notification: React.FC = () => {
   const { notifications, clearNotification } = useNotification();
 
-  return createPortal(
-    <AnimatePresence>
-      {notifications.map((notification) => (
-        <NotificationItem
-          key={notification.id}
-          notification={notification}
-          onDismiss={clearNotification}
-        />
+  if (notifications.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="fixed top-0 left-0 w-full p-4 flex flex-col items-center space-y-2">
+      {notifications.map((notif) => (
+        <div
+          key={notif.id}
+          className={`p-4 rounded-md shadow-md flex items-center justify-between w-full max-w-md`}
+          style={{
+            backgroundColor:
+              notif.type === NotificationType.SUCCESS ? '#d4edda' :
+              notif.type === NotificationType.ERROR ? '#f8d7da' :
+              notif.type === NotificationType.INFO ? '#cce5ff' :
+              notif.type === NotificationType.WARNING ? '#fff3cd' :
+              '#f0f0f0',
+            color:
+              notif.type === NotificationType.SUCCESS ? '#155724' :
+              notif.type === NotificationType.ERROR ? '#721c24' :
+              notif.type === NotificationType.INFO ? '#0c5460' :
+              notif.type === NotificationType.WARNING ? '#856404' :
+              '#333',
+          }}
+        >
+          <span>{notif.message}</span>
+          <button onClick={() => clearNotification(notif.id)} className="ml-2 text-gray-500 hover:text-gray-700">
+            X
+          </button>
+        </div>
       ))}
-    </AnimatePresence>,
-    document.body
+    </div>
   );
 };
 
